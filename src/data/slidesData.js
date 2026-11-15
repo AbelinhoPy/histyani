@@ -1,5 +1,6 @@
 // Base de datos de preparados histológicos para Yanina Sebriano
 // Adaptado del Atlas Práctico de Histología de Yanina, clases UPE Franco (Bruna Bridi) y Ross Histología
+// URLs verificadas y funcionando al 100% con Histology Guide (200 OK)
 
 export const SLIDES_DATA = [
   {
@@ -11,7 +12,7 @@ export const SLIDES_DATA = [
     stain: "Hematoxilina y Eosina (H&E)",
     image: "./slides/higado.jpg",
     schemaImage: "./slides/higado-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-229-liver/10-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-126b-liver/15-slide-1.html",
     lowPowerArchitecture: "Arquitectura cordonal/trabecular compacta. Células poligonales (hepatocitos) dispuestas en placas radiadas hacia una vena central, separadas por sinusoides hepáticos.",
     keyFeatures: [
       "Vena centrolobulillar en el centro de los lobulillos clásicos con cordones radiados de hepatocitos.",
@@ -36,7 +37,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/vesicula-biliar.jpg",
     schemaImage: "./slides/vesicula-biliar-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-230-gallbladder/10-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-130a-gallbladder/15-slide-1.html",
     lowPowerArchitecture: "Pared con mucosa sumamente plegada con aspecto falso de ramificación. ¡ATENCIÓN CÁTEDRA!: Carece de muscular de la mucosa y carece de submucosa.",
     keyFeatures: [
       "Epitelio cilíndrico simple alto con microvellosidades cortas (colangiocitos) y lámina propia vascularizada.",
@@ -60,7 +61,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/pancreas.jpg",
     schemaImage: "./slides/pancreas-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-231-pancreas/10-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-131-pancreas/12-slide-1.html",
     lowPowerArchitecture: "Glándula túbuloacinosa serosa dividida en lobulillos por tabiques conectivos. El 98% es exocrino seroso y el 2% son islotes pálidos endocrinos.",
     keyFeatures: [
       "Acinos puramente serosos con células de citoplasma basal basófilo (RER) y apical eosinófilo (gránulos de cimógeno).",
@@ -84,7 +85,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/duodeno.jpg",
     schemaImage: "./slides/duodeno-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-215-duodenum/12-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-272-duodenum/14-slide-1.html",
     lowPowerArchitecture: "Pared de 4 capas: mucosa con vellosidades digitiformes en hoja, submucosa, muscular externa y serosa/adventicia.",
     keyFeatures: [
       "Presencia de Glándulas de Brunner (glándulas tubulares ramificadas de secreción mucosa) en la SUBMUCOSA.",
@@ -108,7 +109,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/yeyuno.jpg",
     schemaImage: "./slides/yeyuno-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-216-jejunum/12-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-219-jejunum/14-slide-1.html",
     lowPowerArchitecture: "Luz amplia con pliegues circulares (válvulas de Kerkring) muy altos y vellosidades digitiformes largas y abundantes.",
     keyFeatures: [
       "Vellosidades altas, delgadas y numerosas con chapa estriada evidente y lacteal central.",
@@ -132,7 +133,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/ileon.jpg",
     schemaImage: "./slides/ileon-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-217-ileum/12-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-119-ileum/14-slide-1.html",
     lowPowerArchitecture: "Vellosidades más cortas y en menor número; aumento notable de células caliciformes.",
     keyFeatures: [
       "Placas de Peyer: cúmulos de nódulos linfáticos secundarios localizados en la lámina propia que invaden la submucosa en el borde antimesentérico.",
@@ -156,7 +157,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/colon.jpg",
     schemaImage: "./slides/colon-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-219-colon/12-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-123-colon/14-slide-1.html",
     lowPowerArchitecture: "Superficie luminal completamente lisa: NO PRESENTA VELLOSIDADES. Criptas de Lieberkühn rectas, paralelas y profundas, con aspecto de 'tubos de ensayo'.",
     keyFeatures: [
       "Ausencia de vellosidades y presencia masiva de células caliciformes a lo largo de toda la cripta.",
@@ -172,6 +173,29 @@ export const SLIDES_DATA = [
     physiologicalRelation: "Reabsorción de agua y iones sodio/cloro, compactación fecal y fermentación bacteriana de carbohidratos no digeribles."
   },
   {
+    id: "apendice",
+    title: "Apéndice Cecal",
+    system: "Sistema Digestivo II / Linfático",
+    category: "digestivo",
+    type: "Órgano hueco tubular estrecho",
+    stain: "H&E",
+    image: "./slides/apendice.jpg",
+    schemaImage: "./slides/apendice-esquema.jpg",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-122-appendix/14-slide-1.html",
+    lowPowerArchitecture: "Luz pequeña, a menudo estrellada o con detritos. Anillo completo de nódulos linfáticos que ocupa toda la lámina propia y submucosa de forma circular.",
+    keyFeatures: [
+      "Capa muscular longitudinal externa continua (a diferencia del colon que tiene 3 tenias).",
+      "Anillo confluente de tejido linfoide nodular alrededor de toda la pared, sin vellosidades."
+    ],
+    cellsAndComponents: [
+      { name: "Nódulos linfoides", desc: "Centros germinativos prominentes formando una corona linfoide ininterrumpida." },
+      { name: "Criptas de Lieberkühn", desc: "Más cortas y menos regulares que las del colon." }
+    ],
+    clinicalExamFormula: "«Es Apéndice Cecal: luz reducida revestida por mucosa cólica sin vellosidades, con infiltrado linfoide nodular continuo circular y muscular externa uniforme.»",
+    confuseWith: "Íleon. Descarte: El apéndice NO tiene vellosidades y sus nódulos rodean todo el órgano en 360 grados.",
+    physiologicalRelation: "Órgano inmunitario linfoide asociado a mucosas (MALT) y reservorio de microbiota comensal."
+  },
+  {
     id: "rinon-corteza",
     title: "Riñón (Corteza Renal)",
     system: "Sistema Urinario",
@@ -180,7 +204,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/rinon-corteza.jpg",
     schemaImage: "./slides/rinon-corteza-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-236-kidney/16-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-143-kidney/16-slide-1.html",
     lowPowerArchitecture: "Corteza renal de aspecto granuloso debido a la abundancia de corpúsculos renales y laberinto cortical de túbulos contorneados.",
     keyFeatures: [
       "Corpúsculos renales de Malpighi: ovillo capilar (glomérulo) rodeado por el espacio urinario y la cápsula de Bowman (hoja parietal de epitelio plano).",
@@ -205,7 +229,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/ureter.jpg",
     schemaImage: "./slides/ureter-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-238-ureter/16-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-146-ureter/16-slide-1.html",
     lowPowerArchitecture: "Luz estrecha con aspecto característico en 'estrella' por el plegamiento de la mucosa. Capa muscular muy desarrollada.",
     keyFeatures: [
       "Epitelio de transición (UROTELIO): estratificado con células basales, intermedias en raqueta y superficiales cupuliformes o en paraguas.",
@@ -229,7 +253,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/tiroides.jpg",
     schemaImage: "./slides/tiroides-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-242-thyroid/15-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-151-thyroid/13-slide-1.html",
     lowPowerArchitecture: "Única glándula endocrina que almacena su secreción de forma extracelular en grandes cavidades quísticas: los FOLÍCULOS TIROIDEOS.",
     keyFeatures: [
       "Folículos esféricos u ovalados rellenos de coloide eosinófilo homogéneo y vítreo.",
@@ -253,7 +277,7 @@ export const SLIDES_DATA = [
     stain: "H&E o Tricrómico",
     image: "./slides/hipofisis.jpg",
     schemaImage: "./slides/hipofisis-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-240-pituitary/15-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-149-pituitary/13-slide-1.html",
     lowPowerArchitecture: "Órgano con dos orígenes embriológicos distintos claramente visibles a bajo aumento: Adenohipófisis (anterior, epitelial) y Neurohipófisis (posterior, nerviosa).",
     keyFeatures: [
       "Adenohipófisis (pars distalis): nidos y cordones de células epiteliales (acidófilas, basófilas y cromófobas) rodeadas por capilares fenestrados sinusoides.",
@@ -279,7 +303,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/suprarrenal.jpg",
     schemaImage: "./slides/suprarrenal-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-244-adrenal-gland/15-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-155a-adrenal/13-slide-1.html",
     lowPowerArchitecture: "Cápsula conectiva externa, Corteza suprarrenal periférica (80-90% del órgano, dividida en 3 zonas) y Médula suprarrenal central vascular.",
     keyFeatures: [
       "3 zonas corticales concéntricas: Glomerular (arcos), Fascicular (cordones paralelos de espongiocitos) y Reticular (red anastomótica).",
@@ -304,7 +328,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/ovario.jpg",
     schemaImage: "./slides/ovario-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-246-ovary/18-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-160a-ovary/18-slide-1.html",
     lowPowerArchitecture: "Superficie recubierta por epitelio germinativo (cúbico simple) sobre la túnica albugínea. Corteza periférica con folículos ováricos en distintas etapas y médula central muy vascularizada.",
     keyFeatures: [
       "Presencia de folículos ováricos en diferentes estados de maduración en el estroma cortical.",
@@ -330,7 +354,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/trompa-uterina.jpg",
     schemaImage: "./slides/trompa-uterina-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-248-uterine-tube/18-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-171-oviduct/18-slide-1.html",
     lowPowerArchitecture: "Luz con pliegues longitudinales de la mucosa sumamente ramificados y laberínticos (especialmente en la ampolla). Capa muscular lisa gruesa.",
     keyFeatures: [
       "Epitelio cilíndrico simple formado por dos tipos celulares: ciliadas y secretoras no ciliadas (células en clavija / 'peg cells').",
@@ -354,7 +378,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/testiculo.jpg",
     schemaImage: "./slides/testiculo-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-253-testis/19-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-178a-testis/19-slide-1.html",
     lowPowerArchitecture: "Cápsula gruesa conectiva (túnica albugínea) que envía tabiques delimitando lobulillos testiculares, cada uno con 1 a 4 túbulos seminíferos contorneados.",
     keyFeatures: [
       "Túbulos seminíferos cortados transversal y oblicuamente revestidos por un epitelio estratificado especializado (seminífero/espermatogénico).",
@@ -378,7 +402,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/prostata.jpg",
     schemaImage: "./slides/testiculo-esquema.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-256-prostate/19-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-183-prostate/19-slide-1.html",
     lowPowerArchitecture: "Conjunto de 30 a 50 glándulas túbuloalveolares ramificadas inmersas en un abundante estroma fibromuscular característico.",
     keyFeatures: [
       "Alvéolos glandulares de contorno muy irregular con pliegues papilares hacia la luz.",
@@ -394,6 +418,30 @@ export const SLIDES_DATA = [
     physiologicalRelation: "Produce un líquido lechoso alcalino rico en PSA (antígeno prostático específico), ácido cítrico y fosfatasa ácida para licuar el semen."
   },
   {
+    id: "epididimo",
+    title: "Epidídimo",
+    system: "Sistema Genital Masculino",
+    category: "genital-masculino",
+    type: "Vía espermática tubular",
+    stain: "H&E",
+    image: "./slides/epididimo.jpg",
+    schemaImage: "./slides/epididimo-esquema.jpg",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-185-epididymis/19-slide-1.html",
+    lowPowerArchitecture: "Múltiples secciones transversales de un único tubo sumamente contorneado, con luces regulares y limpias repletas de espermatozoides.",
+    keyFeatures: [
+      "Epitelio pseudoestratificado cilíndrico con estereocilios apicales largos y uniformes ('pelitos' inmóviles).",
+      "Luz tubular circular uniforme llena de masa densa de espermatozoides maduros."
+    ],
+    cellsAndComponents: [
+      { name: "Células principales", desc: "Cilíndricas altas con estereocilios; absorben líquido y secretan glucoproteínas para la maduración espermática." },
+      { name: "Células basales", desc: "Pequeñas y redondeadas sobre la membrana basal; células precursoras de reemplazo." },
+      { name: "Músculo liso circular", desc: "Capa fina que se engrosa hacia la cola del epidídimo para impulsar los espermatozoides." }
+    ],
+    clinicalExamFormula: "«Es Epidídimo: luces regulares revestidas por epitelio pseudoestratificado cilíndrico con estereocilios prominentes y espermatozoides intraluminales.»",
+    confuseWith: "Testículo. Descarte: En el testículo hay espermatogénesis en capas con células en división; en el epidídimo el epitelio es liso con estereocilios y solo hay espermatozoides terminados.",
+    physiologicalRelation: "Maduración funcional (adquisición de motilidad) y almacenamiento de espermatozoides."
+  },
+  {
     id: "traquea",
     title: "Tráquea",
     system: "Sistema Respiratorio",
@@ -402,7 +450,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/traquea.jpg",
     schemaImage: "./slides/traquea.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-224-trachea/13-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-136-trachea/17-slide-1.html",
     lowPowerArchitecture: "Tubo fibrocartilaginoso con pared de 4 capas: mucosa, submucosa con glándulas seromucosas, capa cartilaginosa en anillo incompleto en forma de 'C' y adventicia.",
     keyFeatures: [
       "Epitelio Respiratorio típico: Pseudoestratificado cilíndrico ciliado con abundantes células caliciformes.",
@@ -427,7 +475,7 @@ export const SLIDES_DATA = [
     stain: "H&E",
     image: "./slides/bazo.jpg",
     schemaImage: "./slides/bazo.jpg",
-    histologyGuideUrl: "https://histologyguide.com/slideview/MHS-210-spleen/08-slide-1.html",
+    histologyGuideUrl: "https://histologyguide.com/slideview/MH-085-spleen/10-slide-1.html",
     lowPowerArchitecture: "Rodeado por cápsula conectiva con miofibroblastos que emite trabéculas hacia el parénquima. El parénquima se divide nítidamente en Pulpa Blanca (25%) y Pulpa Roja (75%).",
     keyFeatures: [
       "Pulpa Blanca: Vainas linfáticas periarteriolares (PALS, con linfocitos T) que rodean a la arteriola central y nódulos esplénicos (Corpúsculos de Malpighi, linfocitos B) con arteriola excéntrica.",
