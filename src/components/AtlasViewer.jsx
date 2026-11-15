@@ -12,7 +12,8 @@ import {
   Brain,
   Microscope,
   HelpCircle,
-  Bookmark
+  Bookmark,
+  ImageIcon
 } from 'lucide-react';
 
 export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBookmark }) {
@@ -21,6 +22,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
   const [activeSlideId, setActiveSlideId] = useState(SLIDES_DATA[0].id);
   const [occlusionMode, setOcclusionMode] = useState(true);
   const [revealedParts, setRevealedParts] = useState({});
+  const [imageMode, setImageMode] = useState('real'); // 'real' | 'schema'
 
   const activeSlide = SLIDES_DATA.find((s) => s.id === activeSlideId) || SLIDES_DATA[0];
 
@@ -56,6 +58,8 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
   };
 
   const isBookmarked = bookmarkedIds.includes(activeSlide.id);
+
+  const currentDisplayImage = imageMode === 'real' ? activeSlide.image : (activeSlide.schemaImage || activeSlide.image);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
@@ -104,7 +108,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
-            {occlusionMode ? 'Activo (Tipo Anki)' : 'Desactivado (Ver todo)'}
+            {occlusionMode ? 'Activo (Tipo Anki)' : 'Desactivado'}
           </button>
         </div>
       </div>
@@ -112,7 +116,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
       {/* Main Grid: Sidebar + Slide Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Slides List */}
-        <div className="lg:col-span-4 space-y-2.5 max-h-[750px] overflow-y-auto pr-1">
+        <div className="lg:col-span-4 space-y-2.5 max-h-[780px] overflow-y-auto pr-1">
           <div className="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">
             Preparados disponibles ({filteredSlides.length})
           </div>
@@ -123,29 +127,35 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
               <div
                 key={slide.id}
                 onClick={() => setActiveSlideId(slide.id)}
-                className={`p-3.5 rounded-xl border transition-all cursor-pointer text-left relative ${
+                className={`p-3 rounded-xl border transition-all cursor-pointer text-left relative flex items-center gap-3 ${
                   isSelected
                     ? 'bg-gradient-to-r from-pink-50 to-indigo-50 border-pink-400 shadow-sm'
                     : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/50'
                 }`}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md">
+                {/* Micrograph Preview Thumbnail */}
+                <div className="w-14 h-14 rounded-lg overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-1.5 py-0.2 rounded">
                       {slide.system}
                     </span>
-                    <h3 className="font-bold text-slate-900 text-sm mt-1">{slide.title}</h3>
+                    {bookmarked && (
+                      <Bookmark className="w-3.5 h-3.5 text-pink-600 fill-pink-600 shrink-0" />
+                    )}
                   </div>
-                  {bookmarked && (
-                    <Bookmark className="w-4 h-4 text-pink-600 fill-pink-600 shrink-0 mt-1" />
-                  )}
-                </div>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-1">
-                  {slide.lowPowerArchitecture}
-                </p>
-                <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-100 pt-2">
-                  <span>🔬 {slide.stain}</span>
-                  <span className="text-pink-600 font-medium">Ver detalles →</span>
+                  <h3 className="font-bold text-slate-900 text-sm truncate mt-0.5">{slide.title}</h3>
+                  <p className="text-[11px] text-slate-500 truncate mt-0.5">
+                    {slide.lowPowerArchitecture}
+                  </p>
                 </div>
               </div>
             );
@@ -169,7 +179,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
                     Tinción: {activeSlide.stain}
                   </span>
                 </div>
-                <h2 className="text-2xl font-black text-slate-900 mt-1.5 flex items-center gap-2">
+                <h2 className="text-2xl font-black text-slate-900 mt-1.5">
                   {activeSlide.title}
                 </h2>
               </div>
@@ -194,7 +204,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
                   className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 text-white text-xs font-bold shadow-sm hover:from-indigo-700 hover:to-indigo-800 transition-all cursor-pointer"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
-                  Abrir en Histology Guide (Zoom Vivo)
+                  Histology Guide (Zoom)
                 </a>
                 <button
                   onClick={() => onSelectForTutor(activeSlide)}
@@ -206,30 +216,76 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
               </div>
             </div>
 
-            {/* Microscopic Virtual Card & Low-power Architecture */}
-            <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white p-5 rounded-xl relative overflow-hidden shadow-inner">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-pink-300 flex items-center gap-1.5">
-                  <Microscope className="w-4 h-4" /> Arquitectura a bajo aumento (4x)
-                </span>
-                <span className="text-[11px] text-slate-300 bg-white/10 px-2 py-0.5 rounded-md">
-                  Paso 1: Delimitación de conjunto
-                </span>
+            {/* REAL HISTOLOGICAL MICROGRAPH VIEWER */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                    <Microscope className="w-4 h-4 text-pink-600" />
+                    Preparado Microscópico Real (Cátedra UPE)
+                  </span>
+                </div>
+
+                {/* View Switcher: Real Micrograph vs Architectural Scheme */}
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+                  <button
+                    onClick={() => setImageMode('real')}
+                    className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                      imageMode === 'real'
+                        ? 'bg-white text-pink-700 shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    🔬 Microfotografía Real
+                  </button>
+                  {activeSlide.schemaImage && (
+                    <button
+                      onClick={() => setImageMode('schema')}
+                      className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                        imageMode === 'schema'
+                          ? 'bg-white text-indigo-700 shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      📐 Esquema con Rótulos
+                    </button>
+                  )}
+                </div>
               </div>
-              <p className="text-sm text-slate-100 leading-relaxed font-sans">
+
+              {/* Main Image Container */}
+              <div className="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-md group">
+                <img
+                  src={currentDisplayImage}
+                  alt={activeSlide.title}
+                  className="w-full max-h-[460px] object-contain mx-auto transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+                <div className="absolute bottom-3 left-3 right-3 bg-slate-900/80 backdrop-blur-md px-3 py-2 rounded-xl text-white text-xs flex items-center justify-between border border-white/10">
+                  <span className="font-medium">
+                    {imageMode === 'real'
+                      ? `Corte histológico teñido con ${activeSlide.stain}`
+                      : 'Esquema anatómico y relacional de cátedra'}
+                  </span>
+                  <a
+                    href={activeSlide.histologyGuideUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-pink-300 hover:text-pink-200 underline flex items-center gap-1 text-[11px]"
+                  >
+                    Navegar con zoom en Histology Guide →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Architecture Card */}
+            <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                Paso 1: Arquitectura a bajo aumento (4x)
+              </span>
+              <p className="text-sm text-slate-800 leading-relaxed font-sans">
                 {activeSlide.lowPowerArchitecture}
               </p>
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
-                <span>Microscopio virtual: Preparado digitalizado en alta definición</span>
-                <a
-                  href={activeSlide.histologyGuideUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-pink-300 hover:text-pink-200 underline flex items-center gap-1"
-                >
-                  Navegar lámina interactiva con zoom →
-                </a>
-              </div>
             </div>
 
             {/* The 2 Key Features (With Active Recall Occlusion) */}
@@ -241,7 +297,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
                 </h3>
                 {occlusionMode && (
                   <span className="text-xs text-pink-600 font-medium">
-                    Haz clic en cada tarjeta para comprobar si lo recordabas
+                    Toca para revelar y comprobar
                   </span>
                 )}
               </div>
@@ -306,7 +362,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
               </div>
             </div>
 
-            {/* Formula de Examen Práctico (Oral / Campana) */}
+            {/* Formula de Examen Práctico */}
             <div className="p-5 bg-gradient-to-r from-pink-50 to-rose-50 border border-pink-200 rounded-xl space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-pink-800 flex items-center gap-1.5">
@@ -315,7 +371,7 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
                 </span>
                 <button
                   onClick={() => toggleReveal('formula')}
-                  className="text-xs text-pink-700 font-bold hover:underline"
+                  className="text-xs text-pink-700 font-bold hover:underline cursor-pointer"
                 >
                   {isRevealed('formula') ? 'Ocultar' : 'Ver fórmula'}
                 </button>
@@ -330,9 +386,6 @@ export default function AtlasViewer({ onSelectForTutor, bookmarkedIds, toggleBoo
                   ? activeSlide.clinicalExamFormula
                   : 'Fórmula oculta. Toca aquí para ver cómo redactar o decir la respuesta exacta en el examen.'}
               </p>
-              <div className="text-[11px] text-pink-900/70 font-sans">
-                💡 <strong>Tip de Yani:</strong> En el oral no des rodeos. Di el nombre del órgano, los dos rasgos visibles de justificación y su función en una sola frase fluida.
-              </div>
             </div>
           </div>
         </div>

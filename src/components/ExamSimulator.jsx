@@ -10,7 +10,8 @@ import {
   AlertCircle, 
   ArrowRight,
   Flame,
-  Volume2
+  Microscope,
+  Eye
 } from 'lucide-react';
 
 export default function ExamSimulator({ onAddWeakness }) {
@@ -51,7 +52,6 @@ export default function ExamSimulator({ onAddWeakness }) {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
     } else if (timeLeft === 0 && !isAnswered && isActive) {
-      // Time's up! Mark as incorrect
       handleSelectOption('TIMEOUT');
     }
     return () => clearInterval(interval);
@@ -59,7 +59,6 @@ export default function ExamSimulator({ onAddWeakness }) {
 
   const currentSlide = shuffledSlides[currentIndex] || SLIDES_DATA[0];
 
-  // Generate 4 multiple-choice options (1 correct + 3 plausible distractors)
   const getOptions = (slide) => {
     if (!slide) return [];
     const others = SLIDES_DATA.filter((s) => s.id !== slide.id);
@@ -102,7 +101,6 @@ export default function ExamSimulator({ onAddWeakness }) {
       setIsAnswered(false);
       setTimeLeft(timerDuration);
     } else {
-      // Finished all slides!
       setIsActive(false);
       confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
     }
@@ -190,31 +188,43 @@ export default function ExamSimulator({ onAddWeakness }) {
           </div>
         </div>
 
-        {/* Clues Presented in the Microscope */}
-        <div className="p-5 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-xl space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-pink-300">
-              🔬 Observación al microscopio (Campo ciego)
+        {/* REAL MICROSCOPIC SLIDE IMAGE (Campo Ciego) */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-xs font-bold text-slate-600">
+            <span className="flex items-center gap-1.5 uppercase tracking-wider text-pink-700">
+              <Microscope className="w-4 h-4" /> Observa el preparado al microscopio:
             </span>
-            <span className="text-[11px] text-slate-300 bg-white/10 px-2 py-0.5 rounded-md">
+            <span className="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md font-medium">
               Tinción: {currentSlide.stain}
             </span>
           </div>
-          <p className="text-sm text-slate-100 leading-relaxed font-sans font-medium">
+          
+          <div className="rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-md">
+            <img
+              src={currentSlide.image}
+              alt="Preparado ciego de examen"
+              className="w-full max-h-[360px] object-contain mx-auto"
+            />
+          </div>
+        </div>
+
+        {/* Clues Presented in the Microscope */}
+        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+            Pista arquitectónica a bajo aumento (4x):
+          </span>
+          <p className="text-xs md:text-sm text-slate-800 leading-relaxed font-sans">
             "{currentSlide.lowPowerArchitecture}"
           </p>
-          <div className="text-xs text-pink-200/90 pt-2 border-t border-white/10 flex items-center gap-2">
-            <span>💡 <strong>Detalle de 40x:</strong> {currentSlide.keyFeatures[0]}</span>
-          </div>
         </div>
 
         {/* Question */}
         <div>
           <h3 className="text-base font-bold text-slate-900">
-            ¿Qué órgano o estructura diagnosticas en este preparado?
+            ¿Qué órgano o tejido estás observando en esta mesa?
           </h3>
           <p className="text-xs text-slate-500 mt-0.5">
-            Selecciona la opción correcta antes de que suene la campana:
+            Selecciona tu diagnóstico antes de que suene la campana:
           </p>
         </div>
 
@@ -267,7 +277,7 @@ export default function ExamSimulator({ onAddWeakness }) {
               {selectedOption === currentSlide.id ? (
                 <>
                   <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                  ¡Excelente Yani! Diagnóstico exacto.
+                  ¡Excelente Yani! Diagnóstico exacto al microscopio.
                 </>
               ) : (
                 <>
