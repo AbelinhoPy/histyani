@@ -1,13 +1,14 @@
 import React from 'react';
-import { Microscope, Brain, Clock, GitCompare, BookOpen, GraduationCap, Heart } from 'lucide-react';
+import { Microscope, Brain, Clock, GitCompare, BookOpen, GraduationCap, Heart, Sparkles, Flame } from 'lucide-react';
 
 export default function Header({ activeTab, setActiveTab, stats }) {
   const tabs = [
+    { id: 'profe', label: 'Simulador Profe (UPE)', icon: Sparkles, badge: '66 Láminas' },
     { id: 'atlas', label: 'Atlas & Preparados', icon: Microscope, badge: 'Histology Guide' },
     { id: 'tutor', label: 'DeepTutor Yani', icon: Brain, badge: 'Socrático' },
     { id: 'campana', label: 'Simulador Campana', icon: Clock, badge: '60s' },
     { id: 'duelos', label: 'Duelo de Confusiones', icon: GitCompare, badge: '5 pares' },
-    { id: 'banco', label: 'Cuestionario 2° Parcial', icon: BookOpen, badge: 'UPE Franco' },
+    { id: 'banco', label: 'Cuestionario 2° Parcial', icon: BookOpen, badge: 'Ross/UPE' },
   ];
 
   return (

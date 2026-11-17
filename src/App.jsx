@@ -5,11 +5,12 @@ import DeepTutor from './components/DeepTutor';
 import ExamSimulator from './components/ExamSimulator';
 import DuelsView from './components/DuelsView';
 import OfficialQuizView from './components/OfficialQuizView';
+import ProfesorSimulatorView from './components/ProfesorSimulatorView';
 import { SLIDES_DATA } from './data/slidesData';
 import { Heart, Sparkles, BookOpen, Microscope, Flame } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('atlas');
+  const [activeTab, setActiveTab] = useState('profe');
   const [selectedSlideForTutor, setSelectedSlideForTutor] = useState(null);
   
   // Persisted bookmarks
@@ -76,6 +77,8 @@ export default function App() {
       <Header activeTab={activeTab} setActiveTab={setActiveTab} stats={stats} />
 
       <main className="flex-1 pb-16">
+        {activeTab === 'profe' && <ProfesorSimulatorView />}
+
         {activeTab === 'atlas' && (
           <AtlasViewer
             onSelectForTutor={handleSelectForTutor}
